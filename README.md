@@ -224,6 +224,7 @@ After running, you'll get three reports:
 ![CSV Report](./assets/report_csv.png)
 
 </details>
+
 ---
 
 ## Design Considerations

@@ -233,7 +233,7 @@ After running, you'll get three reports:
 | Federated vs IAM Detection | The tool detects both Identity Center (SSO) and traditional IAM to avoid false evaluations. |
 | Standards Mapping | All policy checks align with SOC 2 CC6.2 and NIST 800-53 IA-5, enabling real-world audit alignment. |
 | Flexible AWS Profiles | Supports CLI arguments (`--profile`, `--region`) for testing multiple environments easily. |
-| Report Formats | Output is JSON for automation and CSV for stakeholders or documentation. |
+| Report Formats | Output in JSON for automation and CSV for stakeholders or documentation. |
 | CLI Recommendations | Each failing control includes a command to fix it directly using AWS CLI. |
 
 ---

@@ -195,7 +195,7 @@ def main():
 
 ### 4. Reports & Output Files
 
-After running, you'll get three reports:
+After running the code, you'll get three reports:
 
 - Report output in your CLI (compliant and non-compliant examples below)
 - JSON report (non-compliant sample output below)

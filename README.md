@@ -92,7 +92,7 @@ python password_policy_checker.py --profile your-profile-name --region us-east-1
 
 (Refer to link in the Resources section below for full Python code for password_policy_checker.py)
 
-### Example code snippets
+### Example code snippets - Full code can be found in link in Resources section below
 
 Below are select sections of Python code that demonstrate how the tool is designed and structured. These blocks highlight the class setup, core logic, and command-line interface integration.
 

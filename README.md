@@ -148,7 +148,7 @@ def evaluate_policy_compliance(self, policy):
         evaluation['overall_status'] = 'NON_COMPLIANT'
         return evaluation
 
-# ... loop through controls and compare
+# Analysis logic continues... (truncated for brevity)
 
     total_controls = len(self.compliance_standards)
     compliant_count = 0

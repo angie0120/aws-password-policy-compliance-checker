@@ -90,7 +90,7 @@ aws configure sso or aws configure
 
 python password_policy_checker.py --profile your-profile-name --region us-east-1
 
-(code would be located in the file named password_policy_checker.py)
+(Refer to link in the Resources section below for full Python code for password_policy_checker.py)
 
 ### Example code snippets
 
@@ -125,7 +125,7 @@ def __init__(self, profile_name=None, region='us-east-1'):
 
 #### Core logic: evaluating compliance
 
-These snippets contains the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score. Refer to Resources section below for access to full code.
+These snippets contains the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score. 
 
 <details> <summary> View Code</summary>
 
@@ -253,5 +253,3 @@ After running the code, you'll get three reports:
 
 - [Password Policy Verification](https://www.patreon.com/posts/137803768?collection=1606822)
 - [GRC Engineering](https://grcengineeringbook.com/)
-
---

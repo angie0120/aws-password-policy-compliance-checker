@@ -125,7 +125,7 @@ def __init__(self, profile_name=None, region='us-east-1'):
 
 #### Core logic: evaluating compliance
 
-These snippets contains the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score.
+These snippets contains the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score. Refer to Resources section below for access to full code.
 
 <details> <summary> View Code</summary>
 
@@ -248,3 +248,10 @@ After running the code, you'll get three reports:
 - Best practices for automated reporting and compliance remediation
 
 ---
+
+## Resources
+
+- [Password Policy Verification](https://www.patreon.com/posts/137803768?collection=1606822)
+- [GRC Engineering](https://grcengineeringbook.com/)
+
+--

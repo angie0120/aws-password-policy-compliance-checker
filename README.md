@@ -4,64 +4,60 @@ This is a Python-based CLI tool to audit AWS account password policies against c
 
 ---
 
-##  Overview
+## About this project
 
-Many organizations rely on AWS for infrastructure, and strong password policies are a baseline requirement for securing access. This tool was developed to automate the evaluation of those policies against recognized compliance frameworks.
+This tool demonstrates how Governance, Risk, and Compliance (GRC) practices can be automated in AWS. It assesses password policies, detects federated (SSO) vs IAM users, and provides compliance scoring aligned with recognized frameworks.
 
-Key features include:
-- Automatic detection of IAM vs. Identity Center authentication
-- Evaluation of key controls like:
-  - Password length
-  - Use of symbols, numbers, and uppercase/lowercase
-  - Password expiration
-  - Password reuse prevention
-- Scoring system and compliance status (Compliant / Partially Compliant / Non-Compliant)
-- Output reports in JSON and CSV formats
-- Recommendations with actionable AWS CLI commands
+It bridges the gap between cloud security operations and compliance management by producing:
+
+- Structured evidence of password policy compliance
+- Detailed compliance scoring and control-by-control analysis
+- Actionable remediation steps for failing controls
+- Reports in both machine-readable (JSON) and stakeholder-friendly (CSV) formats
+
+> **Why this matters**:
+> Weak or misconfigured AWS password policies increase the risk of unauthorized access. Manual auditing is error-prone and inconsistent. This project automates evaluation, standardizes compliance evidence, and enables faster remediation.
 
 ---
 
-## Technologies Used
+##  Overview
 
-- Python 3
-- Boto3 (AWS SDK for Python)
-- AWS IAM & SSO APIs
-- argparse (for CLI interface)
-- JSON & CSV (for reporting)
-- Windsurf IDE
+| Area                      | Description                                                              |
+| ------------------------- | ------------------------------------------------------------------------ |
+| **Purpose**               | Evaluate AWS password policies against SOC 2 and NIST standards          |
+| **Focus**                 | Detect IAM vs SSO accounts, assess policy controls, and score compliance |
+| **Tech Stack**            | Python • Boto3 • argparse • JSON & CSV • AWS IAM & SSO APIs              |
+| **Key Outcome**           | JSON and CSV compliance reports + CLI recommendations for remediation    |
+| **Compliance Frameworks** | SOC 2 CC6.2, NIST 800-53 IA-5                                            |
+| **Target Users**          | Security, compliance, and cloud governance teams                         |
 
 ---
 
 ## Architecture & Logic Flow
 
-### High-Level Logic Flow
-
 ![Flowchart](./assets/flowchart.png)
 
 ---
 
-## Environment Setup
+## Quick Start
 
-### 1. Set up virtual environment
+### 1. Set up your Python virtual environment
 
-#### Create and activate virtual environment:
+```bash
 python3 -m venv venv
+source venv/bin/activate        # macOS/Linux
+venv\Scripts\activate           # Windows
+pip install boto3
+```
 
-#### On Windows:
-venv\Scripts\activate
-
-#### On macOS/Linux:
-source venv/bin/activate
-
-#### Install dependencies:
-pip install -boto3
-
----
-
-### 2.  AWS Configuration
+### 2.  Configure AWS credentials
 
 #### Configure your AWS credentials using:
-aws configure sso or aws configure
+```bash 
+aws configure sso
+# or
+aws configure
+```
 
 <details> <summary> <strong>Required IAM Permissions</strong> (click to expand)</summary>
 
@@ -84,13 +80,42 @@ aws configure sso or aws configure
 ```
 </details>
 
+### 3. Run the checker
+```bash
+python password_policy_checker.py --profile your-profile-name --region us-east-1
+```
+(Refer to link in the Resources section below for full Python code for password_policy_checker.py)
+
 ---
 
-### 3. How to Run
+## How it works
 
-python password_policy_checker.py --profile your-profile-name --region us-east-1
+1. Initializes a session using the specified AWS profile and region.
+2. Detects whether users are IAM or federated (Identity Center/SSO).
+3. Retrieves current password policies.
+4. Compares policies against compliance baselines:
+    - Minimum password length
+    - Use of symbols, numbers, uppercase/lowercase
+    - Password expiration
+    - Password reuse prevention
+5. Calculates a compliance score and overall status.
+6. Outputs JSON and CSV reports.
+7. Provides CLI-based remediation commands for non-compliant controls.
 
-(Refer to link in the Resources section below for full Python code for password_policy_checker.py)
+All operations are fully automated, requiring no manual console checks.
+
+---
+
+## Core Components
+
+| Component                        | Description                                                                         |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| **PasswordPolicyChecker**        | Python class that manages session, retrieves policies, evaluates compliance         |
+| **evaluate_policy_compliance()** | Compares current AWS password policy to SOC 2 / NIST baselines, calculates score    |
+| **CLI Entry Point**              | `main()` function parses AWS profile and region arguments, runs the assessment      |
+| **Reports**                      | JSON for automation, CSV for stakeholders, includes compliant/non-compliant details |
+
+---
 
 ### Example code snippets - Full code can be found in link in Resources section below
 
@@ -227,15 +252,21 @@ After running the code, you'll get three reports:
 
 ---
 
-## Design Considerations
+## Compliance Context
 
-| Design Element | Why It Matters |
-|----------------|----------------|
-| Federated vs IAM Detection | The tool detects both Identity Center (SSO) and traditional IAM to avoid false evaluations. |
-| Standards Mapping | All policy checks align with SOC 2 CC6.2 and NIST 800-53 IA-5, enabling real-world audit alignment. |
-| Flexible AWS Profiles | Supports CLI arguments (`--profile`, `--region`) for testing multiple environments easily. |
-| Report Formats | Output in JSON for automation and CSV for stakeholders or documentation. |
-| CLI Recommendations | Each failing control includes a command to fix it directly using AWS CLI. |
+| Framework            | Relevant Domains                | Description                                         |
+| -------------------- | ------------------------------- | --------------------------------------------------- |
+| **SOC 2 CC6.2**      | Logical Access Controls         | Validates secure password management                |
+| **NIST 800-53 IA-5** | Identification & Authentication | Ensures strong authentication and password policies |
+
+---
+
+## Governance & Security
+
+- IAM permissions follow least-privilege principles
+- Reports include actionable remediation steps
+- JSON reports support automation and auditing
+- CLI workflow reduces manual errors and ensures repeatability
 
 ---
 

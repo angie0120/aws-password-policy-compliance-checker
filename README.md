@@ -1,26 +1,19 @@
 # AWS Password Policy Compliance Checker
 
-This is a Python-based CLI tool to audit AWS account password policies against compliance standards like SOC 2 CC6.2 and NIST 800-53 IA-5. It evaluates IAM password policies, detects federated authentication via AWS Identity Center, and generates detailed JSON and CSV reports with remediation recommendations.
+Automate NIST 800-53 and SOC 2 password control validation in AWS using Python & Boto3.
 
 ---
 
 ## About this project
 
-This tool demonstrates how Governance, Risk, and Compliance (GRC) practices can be automated in AWS. It assesses password policies, detects federated (SSO) vs IAM users, and provides compliance scoring aligned with recognized frameworks.
-
-It bridges the gap between cloud security operations and compliance management by producing:
-
-- Structured evidence of password policy compliance
-- Detailed compliance scoring and control-by-control analysis
-- Actionable remediation steps for failing controls
-- Reports in both machine-readable (JSON) and stakeholder-friendly (CSV) formats
+This project demonstrates how GRC engineering can automate AWS compliance assessments. It evaluates AWS password policies, detects whether the account uses IAM-managed credentials or federated (SSO) authentication, and generates compliance evidence aligned with NIST 800-53 IA-5 and SOC 2 CC6.2.
 
 > **Why this matters**:
-> Weak or misconfigured AWS password policies increase the risk of unauthorized access. Manual auditing is error-prone and inconsistent. This project automates evaluation, standardizes compliance evidence, and enables faster remediation.
+> It bridges compliance frameworks and cloud security operations by producing structured, audit-ready evidence.
 
 ---
 
-##  Overview
+## Overview
 
 | Area                      | Description                                                              |
 | ------------------------- | ------------------------------------------------------------------------ |
@@ -48,14 +41,18 @@ python3 -m venv venv
 source venv/bin/activate        # macOS/Linux
 venv\Scripts\activate           # Windows
 pip install boto3
+
+# or, for repeatable environment (recommended for teams or GitHub projects):
+pip install -r requirements.txt
 ```
+> `requirements.txt` ensures everyone working with the project installs the exact same dependencies and versions which is useful for consistency and automation pipelines.
 
 ### 2.  Configure AWS credentials
 
 #### Configure your AWS credentials using:
 ```bash 
 aws configure sso
-# or
+# or 
 aws configure
 ```
 
@@ -108,16 +105,17 @@ All operations are fully automated, requiring no manual console checks.
 
 ## Core Components
 
-| Component                        | Description                                                                         |
-| -------------------------------- | ----------------------------------------------------------------------------------- |
-| **PasswordPolicyChecker**        | Python class that manages session, retrieves policies, evaluates compliance         |
-| **evaluate_policy_compliance()** | Compares current AWS password policy to SOC 2 / NIST baselines, calculates score    |
-| **CLI Entry Point**              | `main()` function parses AWS profile and region arguments, runs the assessment      |
-| **Reports**                      | JSON for automation, CSV for stakeholders, includes compliant/non-compliant details |
+| Component                        | Description                                                                    |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| **PasswordPolicyChecker**        | Initializes AWS session, retrieves IAM policies, and manages compliance logic  |
+| **evaluate_policy_compliance()** | Evaluates current AWS password policy against SOC 2 / NIST baselines           |
+| **CLI Entry Point**              | `main()` function handles argument parsing and runs the compliance assessment  |
+| **Reports**                      | Generates JSON (automation) and CSV (stakeholder) compliance outputs           |
 
 ---
 
-### Example code snippets - Full code can be found in link in Resources section below
+### Example code snippets
+*Note: Refer to the [Resources](#resources) section below for the full Python script.*
 
 Below are select sections of Python code that demonstrate how the tool is designed and structured. These blocks highlight the class setup, core logic, and command-line interface integration.
 
@@ -150,7 +148,7 @@ def __init__(self, profile_name=None, region='us-east-1'):
 
 #### 2. Core logic: evaluating compliance
 
-These snippets contains the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score. 
+These snippets contain the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score. 
 
 <details> <summary> View Code</summary>
 
@@ -246,10 +244,10 @@ After running the code, you'll get three reports:
 
 ## Compliance Context
 
-| Framework            | Relevant Domains                | Description                                         |
-| -------------------- | ------------------------------- | --------------------------------------------------- |
-| **SOC 2 CC6.2**      | Logical Access Controls         | Validates secure password management                |
-| **NIST 800-53 IA-5** | Identification & Authentication | Ensures strong authentication and password policies |
+| Framework            | Relevant Domains                | Description                                                                |
+| -------------------- | ------------------------------- | -------------------------------------------------------------------------- |
+| **SOC 2 CC6.2**      | Logical Access Controls         | Evaluates whether user authentication mechanisms enforce strong passwords  |
+| **NIST 800-53 IA-5** | Identification & Authentication | Defines password complexity, expiration, and reuse prevention requirements |
 
 ---
 

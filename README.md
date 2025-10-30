@@ -121,7 +121,7 @@ All operations are fully automated, requiring no manual console checks.
 
 Below are select sections of Python code that demonstrate how the tool is designed and structured. These blocks highlight the class setup, core logic, and command-line interface integration.
 
-#### Class initialization & compliance standards
+#### 1. Class initialization & compliance standards
 
 This snippet shows how the tool initializes with AWS profile support and defines strict baseline standards for password compliance.
 
@@ -148,7 +148,7 @@ def __init__(self, profile_name=None, region='us-east-1'):
 ```
 </details>
 
-#### Core logic: evaluating compliance
+#### 2. Core logic: evaluating compliance
 
 These snippets contains the core logic that compares the current AWS account password policy to SOC 2 and NIST controls, and calculates a compliance score. 
 
@@ -195,7 +195,7 @@ def evaluate_policy_compliance(self, policy):
 
 </details>
 
-#### CLI entry point (main() function)
+#### 3. CLI entry point (main() function)
 
 This function enables the script to be run from the terminal with optional AWS profile and region flags, making it a real CLI tool.
 
@@ -218,7 +218,7 @@ def main():
 
 ---
 
-### 4. Reports & Output Files
+## Reports & Output Files
 
 After running the code, you'll get three reports:
 
@@ -226,29 +226,21 @@ After running the code, you'll get three reports:
 - JSON report (non-compliant sample output below)
 - CSV report (non-compliant sample output below)
 
-<details> <summary> <strong>Sample CLI output showing compliance</strong> (click to expand)</summary>
+**1. Sample CLI output showing compliance**
 
 ![Compliant Report](./assets/compliant.png)
 
-</details>
-
-<details> <summary> <strong>Sample CLI output showing non-compliance</strong> (click to expand)</summary>
+**2. Sample CLI output showing non-compliance**
 
 ![Non-Compliant Report](./assets/non-compliant.png)
 
-</details>
-
-<details> <summary> <strong>Sample JSON screenshot showing non-compliance</strong> (click to expand)</summary>
+**3. Sample JSON screenshot showing non-compliance**
 
 ![JSON Report](./assets/report_json.png)
 
-</details>
-
-<details> <summary> <strong>Sample CSV screenshot showing non-compliance</strong> (click to expand)</summary>
+**4. Sample CSV screenshot showing non-compliance**
   
 ![CSV Report](./assets/report_csv.png)
-
-</details>
 
 ---
 
